@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<bean id="customer1" class="com.honglin_chen.spring_inject_collections.model.Customer">
+		<property name="id" value="1" />
+		<property name="firstName" value="泓霖" />
+		<property name="lastName" value="陈" />
+	</bean>
+	
+	<bean id="customer2" class="com.honglin_chen.spring_inject_collections.model.Customer">
+		<property name="id" value="2" />
+		<property name="firstName" value="雨希" />
+		<property name="lastName" value="周" />
+	</bean>
+	
+	<bean id="customerService" class="com.honglin_chen.spring_inject_collections.service.CustomerService">
+		<property name="customerList">
+			<!-- 通过ref构造List数据(bean类型) -->
+			<list>
+				<ref bean="customer1" />
+				<ref bean="customer2" />
+			</list>
+		</property>
+		
+		<property name="serviceSet">
+			<!-- 设置集合中的数据(字符串类型) -->
+			<set>
+				<value>Telephone Service</value>
+				<value>Consultation Service</value>
+			</set>
+		</property>
+		
+		<property name="channelServiceMap">
+			<!-- 通过entry给map集合构造数据 -->
+			<map>
+				<entry key="1" value="Telephone Service" />
+				<entry key="2" value="Consultation Service" /> 
+			</map>
+		</property>
+		
+		<property name="language">
+			<!-- 通过map实现语言 property -->
+			<map>
+				<entry key="EN" value="English" />
+				<entry key="CN" value="中文" /> 
+				<entry key="EN_CN" value-ref="bilingual" /> 
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="bilingual" class="com.honglin_chen.spring_inject_collections.model.Bilingual">
+		<property name="firstLanguage" value="English" /> 
+		<property name="secondLanguage" value="中文" /> 
+	</bean>
+</beans>
